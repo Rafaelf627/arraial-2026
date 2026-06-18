@@ -363,12 +363,15 @@ async function init() {
 async function carregar() {
   setStatus('⏳ Sincronizando...');
   try {
-    const res = await fetch(SCRIPT_URL, { method:'GET' });
+    const res = await fetch(SCRIPT_URL + '?t=' + Date.now(), {
+      method: 'GET',
+      redirect: 'follow'
+    });
     const data = await res.json();
     if (data.ok && data.reservas) {
       Object.entries(data.reservas).forEach(([id, val]) => {
         const item = itens.find(i => i.id === Number(id));
-        if (item) { item.r = val.n || null; item.b = val.b || ''; }
+        if (item && val.n) { item.r = val.n; item.b = val.b || ''; }
       });
     }
     setStatus('✅ Atualizado às ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}));
