@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>🎪 Arraial da Família Enrolação 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    :root {
+      --am: #F5C518;
+      --vm: #C0392B;
+      --vd: #1E7E34;
+      --lj: #E67E22;
+      --mr: #6B3A1F;
+      --az: #1A5276;
+      --ro: #FF6B6B;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+    body {
+      font-family:'Nunito',sans-serif;
+      background:#1A0800;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* ===== BANDEIRINHAS ===== */
+    #bandeiras-wrap {
+      position:sticky; top:0; z-index:100;
+      background:#3D1500; height:52px; overflow:hidden;
+    }
+    #bandeiras-inner {
+      position:absolute; top:0; left:0;
+      display:flex; gap:1px;
+    }
+    .tri {
+      width:0; height:0;
+      border-left:16px solid transparent;
+      border-right:16px solid transparent;
+      flex-shrink:0;
+      margin-top:2px;
+    }
+
+    /* ===== MAIN ===== */
+    .wrap { max-width:620px; margin:0 auto; padding:0 14px 60px; }
+
+    /* ===== HEADER ===== */
+    header { text-align:center; padding:28px 0 20px; }
+    .emojis-top { font-size:2.6rem; display:block; margin-bottom:4px; }
+    header h1 {
+      font-family:'Lobster',cursive;
+      font-size:clamp(2rem,8vw,3.2rem);
+      color:var(--am);
+      text-shadow:3px 3px 0 var(--mr), 0 0 24px rgba(245,197,24,.35);
+      line-height:1.05;
+    }
+    header h1 em {
+      color:var(--ro); font-style:normal;
+      display:block; font-size:clamp(1.3rem,5.5vw,2rem);
+    }
+    .sub {
+      color:#FFD580; font-size:.9rem; font-weight:800;
+      letter-spacing:1.5px; text-transform:uppercase; margin-top:6px;
+    }
+
+    /* ===== DATA CARD ===== */
+    .data-card {
+      background:linear-gradient(135deg,#8B0000,#5C0000);
+      border:2.5px solid var(--am); border-radius:16px;
+      padding:14px 18px; margin:14px 0 20px;
+      display:flex; align-items:center; gap:14px;
+      box-shadow:0 6px 24px rgba(0,0,0,.5);
+    }
+    .data-card .ico { font-size:2.2rem; flex-shrink:0; }
+    .data-card h3 { color:var(--am); font-size:.9rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; }
+    .data-card p { color:#FFE0E0; font-size:1.05rem; font-weight:700; margin-top:2px; }
+
+    /* ===== STATUS ===== */
+    #sync-status {
+      text-align:center; padding:8px; margin-bottom:10px;
+      font-size:.82rem; font-weight:700; color:#FFD580;
+      min-height:28px;
+    }
+
+    /* ===== CONTADOR ===== */
+    .contador {
+      background:rgba(255,255,255,.04); border:1.5px solid #5C2D00;
+      border-radius:12px; padding:12px 8px; margin-bottom:18px;
+      display:flex; justify-content:space-around; text-align:center;
+    }
+    .cnt-item h4 { font-size:1.5rem; font-weight:900; color:var(--am); }
+    .cnt-item p { font-size:.72rem; color:#FFD580; font-weight:700; text-transform:uppercase; letter-spacing:.5px; }
+
+    /* ===== TITULO LISTA ===== */
+    .lista-titulo {
+      font-family:'Lobster',cursive; font-size:1.7rem;
+      color:#FFD580; text-align:center; margin-bottom:12px;
+      text-shadow:2px 2px 0 var(--mr);
+    }
+
+    /* ===== LEGENDA ===== */
+    .legenda {
+      display:flex; gap:14px; margin-bottom:14px;
+      flex-wrap:wrap; justify-content:center;
+    }
+    .leg { display:flex; align-items:center; gap:5px; font-size:.78rem; color:#FFD580; font-weight:700; }
+    .dot { width:11px; height:11px; border-radius:50%; }
+    .dv { background:var(--vd); }
+    .dr { background:var(--am); }
+
+    /* ===== CARDS ===== */
+    .item-card {
+      background:linear-gradient(135deg,#3A1500,#280C00);
+      border:1.5px solid #5C2D00; border-radius:14px;
+      padding:13px 14px; margin-bottom:9px;
+      display:flex; align-items:center; gap:12px;
+      position:relative; overflow:hidden;
+      transition:transform .15s, border-color .2s, box-shadow .2s;
+      cursor:default;
+      user-select:none;
+    }
+    .item-card::before {
+      content:''; position:absolute; left:0; top:0; bottom:0; width:5px;
+      background:var(--vd); border-radius:14px 0 0 14px;
+    }
+    .item-card.rsv::before { background:var(--am); }
+    .item-card.livre { cursor:pointer; }
+    .item-card.livre:active { transform:scale(.98); border-color:var(--am); }
+    @media(hover:hover) {
+      .item-card.livre:hover { transform:translateX(3px); border-color:var(--am); box-shadow:0 4px 16px rgba(245,197,24,.18); }
+    }
+
+    .em { font-size:1.9rem; flex-shrink:0; width:42px; text-align:center; }
+    .inf { flex:1; min-width:0; }
+    .nm { font-size:.97rem; font-weight:800; color:#FFE8C8; line-height:1.25; }
+    .tag-rsv {
+      display:inline-flex; align-items:center; gap:3px; margin-top:4px;
+      background:rgba(245,197,24,.13); border:1px solid rgba(245,197,24,.4);
+      border-radius:20px; padding:2px 9px;
+      font-size:.76rem; font-weight:800; color:var(--am);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
+    }
+    .tag-livre {
+      display:inline-block; margin-top:4px;
+      background:rgba(30,126,52,.2); border:1px solid rgba(30,126,52,.5);
+      border-radius:20px; padding:2px 9px;
+      font-size:.76rem; font-weight:800; color:#5ECC77;
+    }
+    .si { font-size:1.3rem; flex-shrink:0; }
+
+    /* ===== BTN COMPARTILHAR ===== */
+    .btn-share {
+      display:block; width:100%; margin-top:24px;
+      background:linear-gradient(135deg,#8B0000,#5C0000);
+      border:2px solid var(--am); border-radius:14px;
+      color:var(--am); font-family:'Nunito',sans-serif;
+      font-size:1rem; font-weight:900; padding:14px;
+      cursor:pointer; text-align:center; letter-spacing:.5px;
+    }
+    .btn-share:active { opacity:.85; }
+
+    /* ===== MODAL ===== */
+    .overlay {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.78); z-index:200;
+      align-items:flex-end; justify-content:center;
+    }
+    .overlay.open { display:flex; }
+    .modal {
+      background:linear-gradient(160deg,#3D1500,#220900);
+      border:2.5px solid var(--am); border-radius:22px 22px 0 0;
+      padding:28px 20px 36px; width:100%; max-width:620px;
+      box-shadow:0 -8px 40px rgba(0,0,0,.7);
+      animation:slideup .25s ease;
+    }
+    @keyframes slideup { from{transform:translateY(100%)} to{transform:translateY(0)} }
+    .modal h2 {
+      font-family:'Lobster',cursive; color:var(--am); font-size:1.55rem;
+      text-shadow:2px 2px 0 var(--mr); margin-bottom:4px;
+    }
+    .modal .mdesc { color:#FFD580; font-size:.95rem; font-weight:700; margin-bottom:18px; line-height:1.4; }
+    .modal label { display:block; color:#FFE8C8; font-size:.85rem; font-weight:800; margin-bottom:5px; }
+    .modal input {
+      width:100%; background:rgba(255,255,255,.07); border:2px solid #5C2D00;
+      border-radius:10px; padding:11px 14px; color:#FFE8C8;
+      font-size:1rem; font-family:'Nunito',sans-serif; font-weight:700;
+      margin-bottom:14px; outline:none; transition:border-color .2s;
+      -webkit-appearance:none;
+    }
+    .modal input:focus { border-color:var(--am); }
+    .modal input::placeholder { color:rgba(255,232,200,.3); }
+    .mbtns { display:flex; gap:10px; margin-top:2px; }
+    .btn-ok {
+      flex:1; background:linear-gradient(135deg,#1E7E34,#145A23);
+      color:#fff; font-family:'Nunito',sans-serif; font-size:1rem;
+      font-weight:900; border:none; border-radius:12px; padding:14px;
+      cursor:pointer; transition:opacity .2s;
+    }
+    .btn-ok:active { opacity:.85; }
+    .btn-no {
+      flex:1; background:rgba(255,255,255,.07); color:#FFD580;
+      font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700;
+      border:1.5px solid #5C2D00; border-radius:12px; padding:14px;
+      cursor:pointer;
+    }
+    .saving-indicator {
+      text-align:center; color:#FFD580; font-size:.85rem;
+      font-weight:700; margin-top:8px; min-height:20px;
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position:fixed; bottom:20px; left:50%;
+      transform:translateX(-50%) translateY(80px);
+      background:var(--vd); color:#fff; padding:11px 22px;
+      border-radius:40px; font-weight:800; font-size:.95rem;
+      z-index:300; transition:transform .3s; pointer-events:none;
+      white-space:nowrap; box-shadow:0 4px 18px rgba(0,0,0,.5);
+    }
+    .toast.show { transform:translateX(-50%) translateY(0); }
+    .toast.erro { background:var(--vm); }
+
+    /* ===== CONFIG BANNER ===== */
+    #config-banner {
+      background:rgba(192,57,43,.15); border:1.5px solid var(--vm);
+      border-radius:12px; padding:12px 14px; margin-bottom:16px;
+      color:#FFB3B3; font-size:.82rem; font-weight:700; text-align:center;
+      display:none;
+    }
+    #config-banner.show { display:block; }
+  </style>
+</head>
+<body>
+
+<div id="bandeiras-wrap"><div id="bandeiras-inner"></div></div>
+
+<div class="wrap">
+  <header>
+    <span class="emojis-top">🎪🌽🎶</span>
+    <h1>Arraial da Família<em>Enrolação 2026</em></h1>
+    <p class="sub">📅 11 de Julho · 14h30</p>
+  </header>
+
+  <div class="data-card">
+    <div class="ico">📍</div>
+    <div>
+      <h3>Local</h3>
+      <p>Casa da Família · Salvador, BA</p>
+    </div>
+  </div>
+
+  <div id="config-banner">
+    ⚙️ Configure o SCRIPT_URL no HTML para ativar a sincronização
+  </div>
+
+  <div id="sync-status">⏳ Carregando lista...</div>
+
+  <div class="contador">
+    <div class="cnt-item"><h4 id="cnt-t">—</h4><p>Total</p></div>
+    <div class="cnt-item"><h4 id="cnt-r">—</h4><p>Reservados</p></div>
+    <div class="cnt-item"><h4 id="cnt-l">—</h4><p>Livres</p></div>
+  </div>
+
+  <p class="lista-titulo">🌾 O que cada um vai trazer?</p>
+
+  <div class="legenda">
+    <div class="leg"><div class="dot dv"></div> Disponível</div>
+    <div class="leg"><div class="dot dr"></div> Reservado</div>
+  </div>
+
+  <div id="lista"></div>
+
+  <button class="btn-share" onclick="compartilhar()">🔗 Compartilhar com a família</button>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="modal">
+  <div class="modal">
+    <h2>🎪 Reservar item</h2>
+    <p class="mdesc" id="mdesc"></p>
+    <label for="mnome">Seu nome *</label>
+    <input id="mnome" type="text" placeholder="Ex: Tia Conceição" autocomplete="off" maxlength="40"/>
+    <label for="mbebida">Bebida que vai trazer (opcional)</label>
+    <input id="mbebida" type="text" placeholder="Ex: Guaraná, Suco de maracujá..." autocomplete="off" maxlength="60"/>
+    <div class="mbtns">
+      <button class="btn-no" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-ok" id="btn-confirmar" onclick="confirmar()">✅ Confirmar</button>
+    </div>
+    <div class="saving-indicator" id="saving-msg"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// =====================================================
+// ⚠️  SUBSTITUA PELA URL DO SEU WEB APP (Apps Script)
+// Extensões > Apps Script > Implantar > Novo deploy
+// Tipo: Web App | Acesso: Anyone
+// =====================================================
+const SCRIPT_URL = 'COLE_AQUI_A_URL_DO_WEB_APP';
+
+// ===== LISTA BASE =====
+const BASE = [
+  { id:0,  e:'🎂', n:'Bolo de Milho',              r:null, b:'' },
+  { id:1,  e:'🍰', n:'Bolo de Aipim',               r:null, b:'' },
+  { id:2,  e:'🥜', n:'Amendoim',                    r:null, b:'' },
+  { id:3,  e:'🌽', n:'Milho Cozido',                r:null, b:'' },
+  { id:4,  e:'🫓', n:'Pamonha',                     r:null, b:'' },
+  { id:5,  e:'🍚', n:'Canjica de Milho',            r:null, b:'' },
+  { id:6,  e:'🍊', n:'20 un. Laranja',              r:null, b:'' },
+  { id:7,  e:'🧃', n:'Lelê',                        r:null, b:'' },
+  { id:8,  e:'🍗', n:'Coxinha',                     r:null, b:'' },
+  { id:9,  e:'🥟', n:'Empanada',                    r:null, b:'' },
+  { id:10, e:'🥣', n:'Caldo Verde',                 r:null, b:'' },
+  { id:11, e:'🍲', n:'Caldo de Aipim',              r:null, b:'' },
+  { id:12, e:'🍋', n:'Bolo de Laranja',             r:null, b:'' },
+  { id:13, e:'🍬', n:'Pé de Moleque',               r:null, b:'' },
+  { id:14, e:'🥙', n:'Saltenha',                    r:null, b:'' },
+  { id:15, e:'🧆', n:'Kibe',                        r:null, b:'' },
+  { id:16, e:'🎃', n:'Caldo de Abóbora',            r:null, b:'' },
+  { id:17, e:'🦐', n:'Caldo de Camarão',            r:null, b:'' },
+  { id:18, e:'🥞', n:'Mungunzá',                    r:null, b:'' },
+  { id:19, e:'🍯', n:'Cocada',                      r:null, b:'' },
+  { id:20, e:'🌾', n:'Cuscuz com Queijo',           r:null, b:'' },
+  { id:21, e:'🍢', n:'Espetinho de Carne',          r:null, b:'' },
+  { id:22, e:'🥧', n:'Bolo de Fubá',                r:null, b:'' },
+  { id:23, e:'🍮', n:'Curau de Milho',              r:null, b:'' },
+  { id:24, e:'🧁', n:'Bolo de Mandioca',            r:null, b:'' },
+  { id:25, e:'🍩', n:'Quentão de Vinho',            r:null, b:'' },
+  { id:26, e:'🥤', n:'Quentão de Gengibre',         r:null, b:'' },
+  { id:27, e:'🍑', n:'Doce de Leite',               r:null, b:'' },
+  { id:28, e:'🥜', n:'Paçoca',                      r:null, b:'' },
+  { id:29, e:'🍿', n:'Pipoca',                      r:null, b:'' },
+  { id:30, e:'🥩', n:'Buchada (Caldo)',             r:null, b:'' },
+  { id:31, e:'🫘', n:'Feijão Verde Cozido',         r:null, b:'' },
+  { id:32, e:'🍞', n:'Bolo de Queijo',              r:null, b:'' },
+  { id:33, e:'🍜', n:'Caldo de Galinha',            r:null, b:'' },
+];
+
+// Respostas pré-definidas do arquivo original
+const PRE = { 0:'Ana', 1:'Silvia', 6:'Conceição', 8:'Eliene', 9:'Alice', 10:'Bruna', 11:'Milena', 17:'Taís' };
+
+let itens = BASE.map(i => ({...i, r: PRE[i.id] || null}));
+let itemSel = null;
+let scriptOk = SCRIPT_URL !== 'COLE_AQUI_A_URL_DO_WEB_APP';
+
+// ===== INIT =====
+async function init() {
+  if (!scriptOk) {
+    document.getElementById('config-banner').classList.add('show');
+    setStatus('📋 Modo local — configure o Apps Script para sincronizar');
+    render();
+    return;
+  }
+  await carregar();
+  setInterval(carregar, 30000);
+}
+
+// ===== CARREGAR DO SHEETS =====
+async function carregar() {
+  setStatus('⏳ Sincronizando...');
+  try {
+    const res = await fetch(SCRIPT_URL, { method:'GET' });
+    const data = await res.json();
+    if (data.ok && data.reservas) {
+      Object.entries(data.reservas).forEach(([id, val]) => {
+        const item = itens.find(i => i.id === Number(id));
+        if (item) { item.r = val.n || null; item.b = val.b || ''; }
+      });
+    }
+    setStatus('✅ Atualizado às ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}));
+  } catch(e) {
+    setStatus('⚠️ Sem conexão — mostrando lista local');
+  }
+  render();
+}
+
+// ===== RENDER =====
+function render() {
+  const lista = document.getElementById('lista');
+  lista.innerHTML = '';
+  const rsv = itens.filter(i => i.r).length;
+  document.getElementById('cnt-t').textContent = itens.length;
+  document.getElementById('cnt-r').textContent = rsv;
+  document.getElementById('cnt-l').textContent = itens.length - rsv;
+
+  itens.forEach(item => {
+    const d = document.createElement('div');
+    d.className = 'item-card' + (item.r ? ' rsv' : ' livre');
+    d.innerHTML = `
+      <div class="em">${item.e}</div>
+      <div class="inf">
+        <div class="nm">${item.n}</div>
+        ${item.r
+          ? `<span class="tag-rsv">👤 ${item.r}${item.b ? ' · 🥤 ' + item.b : ''}</span>`
+          : `<span class="tag-livre">🟢 Toque para reservar!</span>`}
+      </div>
+      <div class="si">${item.r ? '✅' : '➕'}</div>
+    `;
+    if (!item.r) d.addEventListener('click', () => abrirModal(item));
+    lista.appendChild(d);
+  });
+}
+
+// ===== MODAL =====
+function abrirModal(item) {
+  itemSel = item;
+  document.getElementById('mdesc').textContent = `${item.e} ${item.n}`;
+  document.getElementById('mnome').value = '';
+  document.getElementById('mbebida').value = '';
+  document.getElementById('saving-msg').textContent = '';
+  document.getElementById('btn-confirmar').disabled = false;
+  document.getElementById('modal').classList.add('open');
+  setTimeout(() => document.getElementById('mnome').focus(), 250);
+}
+
+function fecharModal() {
+  document.getElementById('modal').classList.remove('open');
+  itemSel = null;
+}
+
+async function confirmar() {
+  const nome = document.getElementById('mnome').value.trim();
+  const bebida = document.getElementById('mbebida').value.trim();
+  if (!nome) {
+    const inp = document.getElementById('mnome');
+    inp.style.borderColor = '#C0392B';
+    inp.focus();
+    setTimeout(() => inp.style.borderColor = '#5C2D00', 1500);
+    return;
+  }
+
+  const btn = document.getElementById('btn-confirmar');
+  const msg = document.getElementById('saving-msg');
+  btn.disabled = true;
+  msg.textContent = '💾 Salvando...';
+
+  // Atualiza local imediatamente
+  itemSel.r = nome;
+  itemSel.b = bebida;
+  fecharModal();
+  render();
+
+  if (scriptOk) {
+    try {
+      await fetch(SCRIPT_URL, {
+        method:'POST',
+        body: JSON.stringify({
+          acao: 'reservar',
+          id: itemSel.id,
+          item: itemSel.n,
+          emoji: itemSel.e,
+          nome: nome,
+          bebida: bebida
+        })
+      });
+      setStatus('✅ Salvo! Todos vão ver sua reserva.');
+      toast(`🎉 ${nome} reservou: ${itemSel.n}!`);
+    } catch(e) {
+      setStatus('⚠️ Reservado localmente — sincronize mais tarde');
+      toast(`✅ ${nome} reservou: ${itemSel.n}!`);
+    }
+  } else {
+    toast(`✅ ${nome} reservou: ${itemSel.n}! (modo local)`);
+  }
+}
+
+// ===== UTILS =====
+function setStatus(msg) {
+  document.getElementById('sync-status').textContent = msg;
+}
+
+function toast(msg, tipo) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (tipo === 'erro' ? ' erro' : '');
+  setTimeout(() => t.className = 'toast', 3500);
+}
+
+function compartilhar() {
+  const url = window.location.href;
+  const texto = `🎪 Arraial da Família Enrolação 2026!\n📅 11 de Julho · 14h30\n\n🌽 Entre na lista e adicione seu nome:\n${url}`;
+  if (navigator.share) {
+    navigator.share({ title:'Arraial da Família Enrolação 2026', text:texto, url });
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => toast('🔗 Link copiado! Compartilhe com a família!'));
+  } else {
+    toast('🔗 Copie o link e compartilhe!');
+  }
+}
+
+// ===== FECHAR MODAL FORA =====
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) fecharModal();
+});
+document.getElementById('mbebida').addEventListener('keydown', e => {
+  if (e.key === 'Enter') confirmar();
+});
+document.getElementById('mnome').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('mbebida').focus();
+});
+
+// ===== BANDEIRINHAS =====
+function bandeiras() {
+  const c = document.getElementById('bandeiras-inner');
+  const cores = ['#C0392B','#F5C518','#1E7E34','#1A5276','#E67E22','#8E44AD','#D4AC0D','#C0392B'];
+  const qtd = Math.ceil(window.innerWidth / 33) + 3;
+  c.innerHTML = Array.from({length: qtd}, (_, i) => cores[i % cores.length])
+    .map(cor => `<div class="tri" style="border-top:34px solid ${cor};"></div>`)
+    .join('');
+}
+bandeiras();
+window.addEventListener('resize', bandeiras);
+
+// ===== START =====
+init();
+</script>
+</body>
+</html>
