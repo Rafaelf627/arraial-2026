@@ -449,15 +449,21 @@ async function confirmar() {
   render();
 
   if (scriptOk) {
-    try {
-      const _params = new URLSearchParams({ acao:'reservar', id:itemSel.id, item:itemSel.n, emoji:itemSel.e, nome:nome, bebida:bebida });
-      await fetch(SCRIPT_URL + '?' + _params.toString(), { method:'GET', redirect:'follow', cache:'no-cache' });
-      setStatus('✅ Salvo! Todos vão ver sua reserva.');
-      toast(`🎉 ${nome} reservou: ${itemSel.n}!`);
-    } catch(e) {
-      setStatus('⚠️ Reservado localmente — sincronize mais tarde');
-      toast(`✅ ${nome} reservou: ${itemSel.n}!`);
-    }
+    const _params = new URLSearchParams({
+      acao: 'reservar',
+      id: itemSel.id,
+      item: itemSel.n,
+      emoji: itemSel.e,
+      nome: nome,
+      bebida: bebida || ''
+    });
+    // Pixel img — bypassa bloqueio de CORS do Google Apps Script
+    const _url = SCRIPT_URL + '?' + _params.toString();
+    const _img = new Image();
+    _img.onload = _img.onerror = () => setStatus('✅ Salvo! Todos vão ver sua reserva.');
+    _img.src = _url;
+    setStatus('💾 Salvando...');
+    toast(`🎉 ${nome} reservou: ${itemSel.n}!`);
   } else {
     toast(`✅ ${nome} reservou: ${itemSel.n}! (modo local)`);
   }
